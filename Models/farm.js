@@ -22,12 +22,16 @@ const farmSchema = new Schema({
     ]
 });
 
+mongoose.set('useFindAndModify', false);
+
 // DELETE ALL ASSOCIATED PRODUCTS AFTER A FARM IS DELETED
 farmSchema.post('findOneAndDelete', async function (farm) {
+    console.log("pre-middleware", farm)
     if (farm.products.length) {
         const res = await Product.deleteMany({ _id: { $in: farm.products } })
         console.log(res);
     }
+    console.log("post-middleware", farm)
 })
 
 const Farm = mongoose.model('Farm', farmSchema);
