@@ -122,7 +122,7 @@ app.delete('/products/:id', async (req, res) => {
 })
 
 app.get('*', async (req, res) => {
-    res.send("where are you?  Go back to index.js to see find out where you can go!")
+    res.render("index")
 })
 
 app.listen(3000, () => {
