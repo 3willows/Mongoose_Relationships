@@ -53,17 +53,20 @@ const addProduct = async () => {
   await farm.save()
   console.log(farm)
 }
-;(async () => {
+
+const main = async () => {
   Farm.find({ name: "Full Belly Farms" }, function (err, data) {
     if (data.length === 0) {
       ;(async () => {
         await makeFarm()
         await addProduct()
-     })()
+      })()
     }
   })
-})()
+  const farm = await Farm.findOne({ name: "Full Belly Farms" }).populate(
+    "products"
+  )
+  console.log(farm)
+}
 
-// Farm.findOne({ name: "Full Belly Farms" })
-//   .populate("products")
-//   .then((farm) => console.log(farm))
+main()
