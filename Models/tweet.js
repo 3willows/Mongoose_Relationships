@@ -37,19 +37,17 @@ const makeTweets = async () => {
           username: "chickenfan99",
           age: 61,
         })
-        user.save()
+        await user.save()
       })()
     }
   })
   if (user) {
-    user.save()
+    await user.save()
   }
   const tweet2 = new Tweet({ text: "balala text", likes: 1239 })
   tweet2.user = user
-  tweet2.save()
+  await tweet2.save()
 }
-
-makeTweets()
 
 const findTweet = async () => {
   const t = await Tweet.find().populate("user")
@@ -57,5 +55,6 @@ const findTweet = async () => {
 }
 
 ;(async () => {
-  findTweet()
+  await makeTweets()
+  await findTweet()
 })()
