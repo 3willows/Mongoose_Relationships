@@ -4,8 +4,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override')
 
-const Product = require('./models/product');
-const Farm = require('./models/farm')
+const Product = require('./Models/product');
+const Farm = require('./Models/farm')
 const categories = ['fruit', 'vegetable', 'dairy'];
 
 
@@ -121,7 +121,9 @@ app.delete('/products/:id', async (req, res) => {
     res.redirect('/products');
 })
 
-
+app.get('*', async (req, res) => {
+    res.send("where are you?  Go back to index.js to see find out where you can go!")
+})
 
 app.listen(3000, () => {
     console.log("APP IS LISTENING ON PORT 3000!")
