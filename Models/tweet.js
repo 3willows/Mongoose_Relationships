@@ -30,6 +30,7 @@ const Tweet = mongoose.model("Tweet", tweetSchema)
 
 const makeTweets = async () => {
   let user
+  const tweet2 = new Tweet({ text: "balala text", likes: 1239 })
   user = await User.findOne({ username: "chickenfan99" }, function (err, data) {
     if (!data) {
       ;(async () => {
@@ -37,15 +38,15 @@ const makeTweets = async () => {
           username: "chickenfan99",
           age: 61,
         })
+        tweet2.user = user
         await user.save()
       })()
     }
   })
   if (user) {
+    tweet2.user = user
     await user.save()
   }
-  const tweet2 = new Tweet({ text: "balala text", likes: 1239 })
-  tweet2.user = user
   await tweet2.save()
 }
 
